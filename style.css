@@ -1,0 +1,118 @@
+:root {
+  --primary-color: #f1a017;
+  --ligth-font-color: #fff;
+  --dark-font-color: #000;
+}
+
+body {
+  margin: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+
+}
+
+.nav {
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  view-transition-name: nav;
+}
+
+.nav a {
+  color: var(--ligth-font-color);
+  padding: 15px;
+  border-radius: 15px;
+  margin: 15px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--dark-font-color);
+  text-decoration: underline;
+  transition-property: "color";
+  transition-duration: 0.5s;
+}
+
+
+#cat-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+.cat-image {
+  flex: 0 1 auto;
+  height: 300px;
+  position: relative;
+  list-style: none;
+}
+
+.cat-image img {
+  width: 400px;
+  height: 100%;
+  display: block;
+  background: white;
+  z-index: 100;
+  position: relative;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* VIEW TRANSITION API */
+
+/* DOCUMENT TRANSITION CROSS-FADE IN 5 SEC*/
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 10s;
+}
+
+::view-transition-old(nav),
+::view-transition-new(nav) {
+  animation: none;
+  width: fit-content;
+}
+
+@media (min-width: 500px) {
+  /* Overrides for larger displays.
+  This is the shared axis transition from earlier in the article. */
+  ::view-transition-old(root) {
+    animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+      300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+  }
+
+  ::view-transition-new(root) {
+    animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+      300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+  }
+}
+
+/* @keyframes fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes slide-from-right {
+  from { transform: translateX(30px); }
+}
+
+@keyframes slide-to-left {
+  to { transform: translateX(-30px); }
+}
+
+::view-transition-old(root) {
+  animation: 5s cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+}
+
+::view-transition-new(root) {
+  animation: 5s cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+} */
