@@ -6,9 +6,9 @@
 
 body {
   margin: 0;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: 1rem;
-
 }
 
 .nav {
@@ -20,12 +20,10 @@ body {
   view-transition-name: nav;
 }
 
-.nav a {
+.nav h1 {
   color: var(--ligth-font-color);
   padding: 15px;
-  border-radius: 15px;
   margin: 15px;
-  text-decoration: none;
 }
 
 .nav a:hover {
@@ -35,19 +33,20 @@ body {
   transition-duration: 0.5s;
 }
 
-
 #cat-gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
 }
-
 
 .cat-image {
   flex: 0 1 auto;
   height: 300px;
   position: relative;
   list-style: none;
+  padding: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
 }
 
 .cat-image img {
@@ -61,6 +60,7 @@ body {
   object-position: top;
   border-radius: 5px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+  view-transition-name: images;
 }
 
 /* VIEW TRANSITION API */
@@ -68,51 +68,27 @@ body {
 /* DOCUMENT TRANSITION CROSS-FADE IN 5 SEC*/
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 10s;
+  animation-duration: 1000ms;
 }
 
 ::view-transition-old(nav),
 ::view-transition-new(nav) {
   animation: none;
-  width: fit-content;
 }
 
-@media (min-width: 500px) {
-  /* Overrides for larger displays.
-  This is the shared axis transition from earlier in the article. */
-  ::view-transition-old(root) {
-    animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-      300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+@keyframes slide-from-bottom {
+  from {
+    transform: translateY(300px);
   }
-
-  ::view-transition-new(root) {
-    animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-      300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+  to {
+    transform: translateY(0px);
   }
-}
-
-/* @keyframes fade-in {
-  from { opacity: 0; }
-}
-
-@keyframes fade-out {
-  to { opacity: 0; }
-}
-
-@keyframes slide-from-right {
-  from { transform: translateX(30px); }
-}
-
-@keyframes slide-to-left {
-  to { transform: translateX(-30px); }
-}
-
-::view-transition-old(root) {
-  animation: 5s cubic-bezier(0.4, 0, 1, 1) both fade-out,
-    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
 }
 
 ::view-transition-new(root) {
-  animation: 5s cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
-} */
+  animation: 500ms ease-in-out slide-from-bottom;
+}
+
+::view-transition-group(images) {
+  animation: 500ms ease-in-out slide-from-bottom; 
+}
